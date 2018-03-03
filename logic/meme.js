@@ -25,7 +25,7 @@ function createByAutoId(fieldToVal) {
 
 function notifyNewMeme() {
   db.listenForChanges(ref, function(meme) {
-    fcm.sendToTopic(topic, newMemeMsg);
+    fcm.sendNotification(topic, newMemeMsg);
   });
 }
 
