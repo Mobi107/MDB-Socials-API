@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const memeLogic = require("../logic/meme.js");
+memeLogic.notifyNewMeme();
