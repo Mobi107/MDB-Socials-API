@@ -1,1 +1,9 @@
 # meme-api
+Meme API for Training Program
+
+## Environment Variables
+- FIREBASE_PROJECT_ID
+- FIREBASE_CLIENT_EMAIL
+- FIREBASE_PRIVATE_KEY
+- FIREBASE_DB_URL
+- FIREBASE_STORAGE_URL
