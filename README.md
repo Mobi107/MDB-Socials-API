@@ -19,11 +19,11 @@ export FIREBASE_STORAGE_URL="<project id goes here>.appspot.com"
 ```
 
 ## How to setup firebase
-1. create firebase account (sign in with google account)
+1. create [firebase](https://console.firebase.google.com) account (sign in with google account)
 2. create app on firebase console
-3. activate facebook authenication
+3. [activate](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin) facebook authenication
 4. download service key [json file](https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app)
-5. copy json fields over to .env file
+5. copy json fields over to .env file (see above instructions)
 
 ## How to run locally
 1. Make sure you have latest version of node installed
