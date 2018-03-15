@@ -2,31 +2,32 @@
 const router = require("express").Router();
 const completeRequest = require("../util/routing.js").completeRequest;
 const userLogic = require("../logic/user.js");
-const memeRef = require("../logic/meme.js").ref;
+const eventsRef = require("../logic/event.js").ref;
 
 // ROUTES
-router.get("/users/:id", function(req, res) {
-  req.checkParams("id", "no id present").notEmpty();
-  req.checkParams("id", "user id does not exist").isValidId(userLogic.ref);
+router.get("/Users/:id", function(req, res) {
   completeRequest(req, res, function(params) {
     return userLogic.getById(params.id);
   });
 });
 
-router.post("/users/:fbId", function(req, res) {
-  req.checkParams("fbId", "no fbId present").notEmpty();
+router.post("/Users/", function(req, res) {
   req.checkBody("fullname", "no fullname present").notEmpty();
   req.checkBody("email", "no email present").notEmpty();
-  req.checkBody("profPicUrl", "no profPicUrl present").notEmpty();
-  req.checkBody("profPicUrl", "profPicUrl is not a url").isValidUrl();
-  completeRequest(req, res, userLogic.createByManualId);
+  req.checkBody("imageURL", "no profPicUrl present").notEmpty();
+  req.checkBody("id", "no userID present").notEmpty();
+  req.checkBody("username", "no username present").notEmpty();
+  completeRequest(req, res, function(params) {
+    console.log(params)
+    return userLogic.createByAutoId(params)
+  });
 });
 
-router.patch("/users/:id/favorites", function(req, res) {
+router.patch("/Users/:id/favorites", function(req, res) {
   req.checkParams("id", "no id present").notEmpty();
   req.checkParams("id", "user id does not exist").isValidId(userLogic.ref);
-  req.checkBody("memeId", "no memeId present").notEmpty();
-  req.checkBody("memeId", "meme id does not exist").isValidId(memeRef);
+  req.checkBody("postId", "no postId present").notEmpty();
+  req.checkBody("postId", "post id does not exist").isValidId(eventsRef);
   var fn;
   if (req.body.favorite) {
     fn = userLogic.favorite;
@@ -34,7 +35,7 @@ router.patch("/users/:id/favorites", function(req, res) {
     fn = userLogic.unFavorite;
   }
   completeRequest(req, res, function(params) {
-    return fn(req.params.id, req.body.memeId);
+    return fn(req.params.id, req.body.postId);
   });
 });
 
